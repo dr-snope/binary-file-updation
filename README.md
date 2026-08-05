@@ -10,6 +10,7 @@ The repository consists of three core Python scripts:
 
 `create_binary_file.py` 
   Initializes and populates the binary file. It prompts you for the total number of records you want to add, then collects data pairs containing roll numbers and their corresponding marks.
+  
 `read_contents_binary.py`
   Reads and displays the contents of the binary file directly in the console. This allows you to inspect stored data instantly without needing external file viewers or extensions.
   
