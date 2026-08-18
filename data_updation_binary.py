@@ -1,28 +1,29 @@
 import pickle
-f=open('abcd.dat','rb')
-a=int(input('Enter target roll no: '))
-b=int(input('Enter marks to be added: '))
-found = False
-x=[]
-y=[]
-while True:
-    try:
-        l=pickle.load(f)
-        x.append(l)
-    except EOFError:
-        break
-for i in x:
-    if int(i[0])==a:
-        y.append([i[0],int(i[1])+b])
-        found = True
-    else:
-        y.append(i)
-f.close()
-f=open('abcd.dat','wb')
-for i in y:
-    pickle.dump(i,f)
-f.close()
+
+with open('abcd.dat','rb') as file1:
+    target:int = int(input('Enter target roll no: '))
+    increment:int = int(input('Enter marks to be added: '))
+    found:bool = False
+    original_data:list[list[int]] = []
+    modified_data:list[list[int]] = []
+    while True:
+        try:
+            data_pair:list[int] = pickle.load(file1)
+            original_data.append(data_pair)
+        except EOFError:
+            break
+    for data_pair in original_data:
+        if int(data_pair[0]) == target:
+            modified_data.append([data_pair[0],int(data_pair[1])+increment])
+            found = True
+        else:
+            modified_data.append(data_pair)
+
+with open('abcd.dat','wb') as file2:
+    for data_pair in modified_data:
+        pickle.dump(data_pair,file2)
+
 if found:
-    print("Record updated successfully")
+     print("Record updated successfully")
 else:
     print("Roll number not found")
